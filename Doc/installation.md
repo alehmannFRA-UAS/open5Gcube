@@ -33,7 +33,7 @@ sudo apt install linux-tools-lowlatency
 ```
 
 ### Configure CPU Power Management Permanently
-Create a file ``/etc/systemd/system/cpupower`` with the following content
+Create a file ``/etc/systemd/system/cpupower.service`` with the following content
 ```systemd
 [Service]
 Type = oneshot
