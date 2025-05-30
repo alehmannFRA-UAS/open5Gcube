@@ -47,6 +47,12 @@ and enable it with
 sudo systemctl enable cpupower
 ```
 
+#### Clone the Repository
+```console
+git clone https://github.com/open5Gcube/open5Gcube/
+cd open5Gcube
+```
+
 ### Install Docker Engine
 See [official Docker documentation](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 for details. Specific fixed versions of the Docker packages are installed with the script
