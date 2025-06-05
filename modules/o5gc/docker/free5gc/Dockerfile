@@ -16,14 +16,14 @@ RUN cached-download.sh https://dl.google.com/go/go1.21.8.linux-amd64.tar.gz   \
     && rm go1.*.tar.gz
 ENV PATH="$PATH:/usr/local/go/bin"
 
-ARG GTP5G_VERSION=0.9.11
+ARG GTP5G_VERSION=0.9.14
 RUN git clone https://github.com/free5gc/gtp5g.git                            \
     && cd gtp5g                                                               \
     && git checkout v${GTP5G_VERSION}
 
 WORKDIR /o5gc/free5gc
 
-ARG FREE5GC_VERSION=3.4.4
+ARG FREE5GC_VERSION=4.0.1
 RUN git clone --branch v${FREE5GC_VERSION} --depth 1 --recurse-submodules     \
         -j $(nproc) https://github.com/free5gc/free5gc.git .                  \
     && sync-cache.sh download free5gc go-cache-dl go-cache-build npm-cache    \
