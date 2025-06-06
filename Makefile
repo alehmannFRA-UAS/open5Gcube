@@ -3,7 +3,9 @@ BASE_DIR := $(realpath $(dir $(realpath $(firstword $(MAKEFILE_LIST)))))
 ENV_DIR = ${BASE_DIR}/var/etc
 MODULES_DIR = ${BASE_DIR}/modules
 DOCKER_HOST_BRIDGE := $(shell docker network inspect bridge -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}')
-DEFAULT_ROUTE_IFACE_IP := $(shell ip route | sed -n 's|.* src \(.*\) metric .*|\1|p' | uniq)
+DEAFULT_ROUTE_IFACE := $(shell ip route show to default | grep -Eo "dev\s*[[:alnum:]]+" | sed 's/dev\s//g')
+DEFAULT_ROUTE_IFACE_IP := $(shell ip -f inet addr show $$DEFAULT_ROUTE_IFACE | sed -En -e 's/.*inet ([0-9.]+).*/\1/p')
+## DEFAULT_ROUTE_IFACE_IP := $(shell ip route | sed -n 's|.* src \(.*\) metric .*|\1|p' | uniq)
 HOST_USER_GROUP_ID := $(shell echo $$(id -u):$$(id -g))
 
 export BASE_DIR DOCKER_HOST_BRIDGE OAI_TRACER_ENABLE HOST_USER_GROUP_ID DEFAULT_ROUTE_IFACE_IP
