@@ -19,17 +19,17 @@ if [ ! -d /sys/class/net/${USRP_IFACE} ]; then
     echo "Create dummy USRP Interface '${USRP_IFACE}'"
     (set -x
     ip link add ${USRP_IFACE} type dummy )
+    echo "Configure USRP Interface '${USRP_IFACE}'"
+    (set -x
+    ifconfig ${USRP_IFACE} 192.168.40.1/24 up
+    ifconfig ${USRP_IFACE} mtu 9000 )
 fi
-
-echo "Configure USRP Interface '${USRP_IFACE}'"
-(set -x
-ifconfig ${USRP_IFACE} 192.168.40.1/24 up
-ifconfig ${USRP_IFACE} mtu 9000 )
 
 if [ -d /sys/class/net/corenet ]; then
     (set -x
     ip link delete corenet )
 fi
+
 if [ "${CORENET_DRIVER}" == "macvlan" ]; then
     echo "Create macvlan interface 'corenet' @ ${CORENET_MACVLAN_IFACE}"
     (set -x
