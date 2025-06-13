@@ -62,6 +62,7 @@ make system-install-docker
 ```
 ```console
 sudo usermod -aG docker $USER
+su - $USER
 ```
 
 ### Networking
