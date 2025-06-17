@@ -63,6 +63,7 @@ make system-install-docker
 ```console
 sudo usermod -aG docker $USER
 su - $USER
+cd open5Gcube
 ```
 
 ### Networking
